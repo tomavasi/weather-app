@@ -1,0 +1,36 @@
+.weather-container{
+    max-width: 400px;
+}
+
+.currentWeather{
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.currentWeather p{
+    padding: 2px;
+}
+.cityname{
+    font-size:1.25rem;
+    font-weight: bold;
+}
+.temp{
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+.forecast-panel{
+    display:flex;
+    overflow-x: scroll;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    scrollbar-width: thin;
+   padding-bottom: 1rem;
+}
+
+.forecast{
+    display: inline-block;
+    text-align: center;
+    width:50px
+
+}
