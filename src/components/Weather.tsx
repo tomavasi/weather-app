@@ -33,7 +33,7 @@ function Weather({currentWeather , forecast}:PropsType): JSX.Element{
     </div>
     <div className="forecast-panel">
         {forecast.list.map((item, i)=>
-        <div className="forecast">
+        <div className="forecast" key={item.dt}>
           <p className="dt">
             {new Date(item.dt*1000).getHours()}
           </p>

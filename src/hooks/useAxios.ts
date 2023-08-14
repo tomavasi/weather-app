@@ -19,5 +19,5 @@ export const useAxios = (url:string)=> {
             });
             },[url]);
 
-    return {data,setData, loading, error};
+    return {data, setData, loading, error};
 }

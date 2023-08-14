@@ -1,35 +1,59 @@
 import Search from "./components/Search"
 import  './App.css'
 import Weather from "./components/Weather"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import { DataContext } from "./context/DataContext"
-// import SpotifyLogin from "./components/SpotifyLogin"
-import Spotify from "./components/Spotify"
-import { Scopes, SearchResults, SpotifyApi } from "@spotify/web-api-ts-sdk"
-const sdk = SpotifyApi.withUserAuthorization(import.meta.env.VITE_CLIENT_ID, import.meta.env.VITE_REDIRECT_URI,Scopes.all)
-// await sdk.authenticate()
+import { SpotifyApi, Scopes} from "@spotify/web-api-ts-sdk"
+import WebPlaybackPlayer from "./components/WebPlayback"
+
+
 
  function App() {
+  const {currentWeather , forecast}= useContext(DataContext)
+  const sdk = SpotifyApi.withUserAuthorization(
+    import.meta.env.VITE_CLIENT_ID,
+    import.meta.env.VITE_REDIRECT_URI,
+    Scopes.all
+  )
+  const [accessToken, setAccessToken] = useState<string | null>("")
+  const [loginState, setloginState] = useState("")
+useEffect(()=>{
+  const localLogin =  window.localStorage.getItem("login")
+  if (localLogin === "true")
+  (async () => await sdk.authenticate().then(()=> setloginState(localLogin)))()
+},[])
 
-  const {currentWeather , forecast}=useContext(DataContext)
-  const [loginSpotify,setLoginSpotify] = useState<boolean>(false)
-  
-  const login = async () =>{
-    await sdk.authenticate()
-    setLoginSpotify(!loginSpotify)
-  }
- const verifier = window.localStorage.getItem("spotify-sdk:verifier")
+useEffect(()=>{
+  (async () => {
+    const localStorageToken = await sdk.getAccessToken();
+    if (localStorageToken) {
+      setAccessToken(localStorageToken.access_token)
+    }})()
+},[loginState])
+
+const loginToSpotify = async () => {
+sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true"))
+}
   return (
   <div className="App">
   <main className="main">
-  <h1>Weather App</h1>
+  <div className="title"><h1>Weather App</h1></div>
    <>
-    {forecast && currentWeather ? (<Weather forecast={forecast} currentWeather= {currentWeather}/>) : <Search/>}
+    {(!loginState || loginState === "false") &&
+    <div>
+    <p>
+    In order to procceed to the app you need a Spotify account.
+    </p>
+    <button onClick={loginToSpotify}>Login to Spotify</button></div>}
+    {!forecast && accessToken &&
+    <Search/>}
+    {forecast && currentWeather && loginState === "true"&&
+    <>
+    <Weather forecast={forecast} currentWeather= {currentWeather}/>
+    <WebPlaybackPlayer sdk={sdk} accessToken={accessToken} setloginState={setloginState}/>
     </>
-    {!verifier && <button onClick={login}>Log in Spotify</button>}
-    {verifier && <button onClick={login}>Continue to Spotify</button>}
-    <Spotify sdk={sdk} loginSpotify={loginSpotify}/>
-
+    }
+    </>
   </main>
   </div>
 

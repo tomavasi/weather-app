@@ -5,7 +5,7 @@ import { ContextType } from "../context/DataContext";
 import './search.css'
 const Search = () => {
 
-  const {term, onInputChange, options, setCityData, onTermSubmit, cityData, setTerm, setOptions} = useContext<ContextType>(DataContext);
+  const {term, onInputChange, options, setCityData, onTermSubmit } = useContext<ContextType>(DataContext);
 
   
   return (
@@ -16,7 +16,7 @@ const Search = () => {
         <input value={term} onChange={onInputChange}/>
         <button onClick={onTermSubmit}>Search</button>
        {term.length > 0 && options.map((city: cityType) =>
-       <ul>
+       <ul key={city.lat}>
        <li>
       <button onClick= { ()=> {
         setCityData(city);

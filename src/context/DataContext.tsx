@@ -1,6 +1,8 @@
 import { createContext, useState, ChangeEvent, ReactElement, useEffect } from "react";
 import { useAxios} from "../hooks/useAxios";
 import axios from "axios";
+
+
 export type cityType = {
     country: string,
     lat: number ,
@@ -72,6 +74,7 @@ export type ContextType = {
   cityData: cityType | null
   options: []
   setOptions: React.Dispatch<React.SetStateAction<[]>>
+ 
 }
 
 
@@ -133,6 +136,7 @@ export const DataContextProvider = ({children}:ChildernType) =>{
         setOptions([])
       }
     },[cityData])
+
       const contextValue = {term , setTerm, cityData, setCityData, onInputChange, forecast, currentWeather, onTermSubmit,options,setOptions}
 return (<DataContext.Provider value={contextValue}>{children}</DataContext.Provider>)
 }

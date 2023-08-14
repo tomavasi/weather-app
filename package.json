@@ -10,11 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@spotify/web-api-ts-sdk": "^1.0.0",
+    "@createnextapp/async-local-storage": "^1.0.1",
+    "@spotify/web-api-ts-sdk": "^1.1.0",
     "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^4.0.3",
+    "react-icons": "^4.10.1",
+    "react-scripts": "^5.0.1",
+    "react-spotify-web-playback-sdk": "^3.0.2",
+    "reactjs-async-localstorage": "^1.0.4",
+    "spotify-web-playback-ts": "^0.0.2",
     "typescript": "^3.2.1"
   },
   "devDependencies": {
