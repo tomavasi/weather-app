@@ -1,5 +1,4 @@
 {
-  "homepage": "https://tomavasi.github.io/weather-app",
   "name": "weather-app",
   "private": true,
   "version": "0.0.0",
@@ -8,9 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@createnextapp/async-local-storage": "^1.0.1",
