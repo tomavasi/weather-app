@@ -9,22 +9,23 @@ const Search = () => {
 
   
   return (
-    <div>
+    <div className="searchContainer">
         <p>
-            Please enter the location you want to know the weather for
+            Please enter a name of a city and choose the location you want out of the list:
         </p>
+    <div className="search">
         <input value={term} onChange={onInputChange}/>
-        <button onClick={onTermSubmit}>Search</button>
+        <ul className="searchlist">
        {term.length > 0 && options.map((city: cityType) =>
-       <ul key={city.lat}>
-       <li>
+       <li  key={city.lat}>
       <button onClick= { ()=> {
         setCityData(city);
         }}> {city.name}, {city.country}
       </button>
-      </li>
-      </ul>)
-      }
+      </li>)}
+      </ul>
+        <button onClick={onTermSubmit}>Search</button>
+    </div>
     </div>
   )
 }

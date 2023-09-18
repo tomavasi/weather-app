@@ -1,11 +1,19 @@
 .weather-container{
+    flex:5;
+    position: relative;
     max-width: 400px;
+    height: 100;
 }
 
 .currentWeather{
     display: block;
     text-align: center;
     margin-top: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 50%;
+    margin: 1rem auto;
+    border-radius: 1rem;
+    padding: 0.5rem;
 }
 
 .currentWeather p{
@@ -22,8 +30,7 @@
 .forecast-panel{
     display:flex;
     overflow-x: scroll;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-top:3rem;
     scrollbar-width: thin;
    padding-bottom: 1rem;
 }

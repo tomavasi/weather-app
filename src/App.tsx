@@ -5,6 +5,7 @@ import { useContext, useState, useEffect } from "react"
 import { DataContext } from "./context/DataContext"
 import { SpotifyApi, Scopes} from "@spotify/web-api-ts-sdk"
 import WebPlaybackPlayer from "./components/WebPlayback"
+import SpotifyLogin from "./components/SpotifyLogin"
 
 
 
@@ -20,7 +21,7 @@ import WebPlaybackPlayer from "./components/WebPlayback"
 useEffect(()=>{
   const localLogin =  window.localStorage.getItem("login")
   if (localLogin === "true")
-  (async () => await sdk.authenticate().then(()=> setloginState(localLogin)))()
+  (() => sdk.authenticate().then(()=> setloginState(localLogin)).catch((err)=>console.error(err)))()
 },[])
 
 useEffect(()=>{
@@ -31,20 +32,29 @@ useEffect(()=>{
     }})()
 },[loginState])
 
-const loginToSpotify = async () => {
-sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true"))
+const loginToSpotify =  () => {
+sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true")).catch((err)=>console.error(err))
 }
+
   return (
-  <div className="App">
   <main className="main">
-  <div className="title"><h1>Weather App</h1></div>
-   <>
+  <div className="title">
+    <h1>Weathify</h1>
+  </div>
+  {/* <SpotifyLogin sdk={sdk} accessToken={accessToken} setloginState={setloginState}/> */}
     {(!loginState || loginState === "false") &&
     <div>
-    <p>
+    <p className="p1">
+      Welcome to Weathify!
+    </p>
+    <p className="p2">
+      With Weathify you can look up the weather of your city or any other place and get relatable Spotify playlists depending of the current weather
+    </p>
+    <p className="p3">
     In order to procceed to the app you need a Spotify account.
     </p>
-    <button onClick={loginToSpotify}>Login to Spotify</button></div>}
+    <div className="spotifybtn">
+    <button  onClick={loginToSpotify}>Login to Spotify</button></div></div>}
     {!forecast && accessToken &&
     <Search/>}
     {forecast && currentWeather && loginState === "true"&&
@@ -53,9 +63,8 @@ sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true"))
     <WebPlaybackPlayer sdk={sdk} accessToken={accessToken} setloginState={setloginState}/>
     </>
     }
-    </>
+  {/* <SpotifyLogin/> */}
   </main>
-  </div>
 
   )
 }
