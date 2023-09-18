@@ -48,7 +48,7 @@ sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true")).catch
       Welcome to Weathify!
     </p>
     <p className="p2">
-      With Weathify you can look up the weather of your city or any other place and get relatable Spotify playlists depending of the current weather
+      With Weathify you can look up the weather of your city or any other place and get relatable Spotify playlists depending on the current weather
     </p>
     <p className="p3">
     In order to procceed to the app you need a Spotify account.
