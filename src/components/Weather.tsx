@@ -1,6 +1,4 @@
-import { useContext } from "react"
-import { ContextType, forecastType, CurrentWeatherType} from "../context/DataContext"
-import { DataContext } from "../context/DataContext"
+import { forecastType, CurrentWeatherType} from "../context/DataContext"
 import "./weather.css"
 type PropsType ={
   currentWeather: CurrentWeatherType
@@ -32,7 +30,7 @@ function Weather({currentWeather , forecast}:PropsType): JSX.Element{
       </p>
     </div>
     <div className="forecast-panel">
-        {forecast.list.map((item, i)=>
+        {forecast.list.map((item)=>
         <div className="forecast" key={item.dt}>
           <p className="dt">
             {new Date(item.dt*1000).getHours()}

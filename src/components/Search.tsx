@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { cityType } from "../context/DataContext";
 import { ContextType } from "../context/DataContext";
@@ -7,7 +7,7 @@ const Search = () => {
 
   const {term, onInputChange, options, setCityData, onTermSubmit } = useContext<ContextType>(DataContext);
 
-  
+
   return (
     <div className="searchContainer">
         <p>

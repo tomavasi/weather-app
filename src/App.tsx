@@ -5,7 +5,6 @@ import { useContext, useState, useEffect } from "react"
 import { DataContext } from "./context/DataContext"
 import { SpotifyApi, Scopes} from "@spotify/web-api-ts-sdk"
 import WebPlaybackPlayer from "./components/WebPlayback"
-import SpotifyLogin from "./components/SpotifyLogin"
 
 
 

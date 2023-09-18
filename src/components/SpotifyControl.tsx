@@ -6,10 +6,10 @@ import {
   usePlayerDevice,
   useSpotifyPlayer
 } from "react-spotify-web-playback-sdk";
-import {MdSkipNext, MdSkipPrevious,MdPlayArrow,MdPause,MdVolumeOff,MdVolumeDown,MdVolumeUp,MdShuffle,MdLogout,MdRefresh, MdRemove, MdAdd, MdAccountCircle} from "react-icons/md"
-import Spotify_Icon from "../images/Spotify_Icon_RGB_Green.png"
+import {MdSkipNext, MdSkipPrevious,MdPlayArrow,MdPause,MdVolumeOff,MdVolumeDown,MdVolumeUp,MdShuffle,MdLogout,MdRefresh, MdAccountCircle} from "react-icons/md"
+
 import Spotify_Logo from "../images/Spotify_Logo_RGB_Green.png"
-import heartLogo from "../assets/heart-64.svg"
+
 
 
 

@@ -20,7 +20,8 @@
     "react-spotify-web-playback-sdk": "^3.0.2",
     "reactjs-async-localstorage": "^1.0.4",
     "spotify-web-playback-ts": "^0.0.2",
-    "typescript": "^3.2.1"
+    "typescript": "^5.2.2",
+    "vite-plugin-checker": "^0.6.2"
   },
   "devDependencies": {
     "@types/node": "^20.3.3",
