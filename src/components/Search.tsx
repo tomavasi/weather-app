@@ -10,8 +10,13 @@ const Search = () => {
 
   return (
     <div className="searchContainer">
+      <div className="subtitle">
+      <span>Weather</span><h2>Forecast</h2>
+      </div>
+      <br></br>
+      <br></br>
         <p>
-            Please enter a name of a city and choose the location you want out of the list:
+            Please enter the name of a city you want out of the list:
         </p>
     <div className="search">
         <input value={term} onChange={onInputChange}/>

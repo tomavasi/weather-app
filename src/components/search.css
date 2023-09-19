@@ -7,6 +7,21 @@
     align-items: center;
     justify-content: center;
     margin: 4rem 2rem;
+    height: 50%;
+}
+
+.subtitle{
+    display: inline-flex;
+    align-items: center;
+}
+
+.subtitle span {
+    font-size: 24px;
+    
+}
+
+.subtitle h2{
+    font-size: 30px;
 }
 
 .search{
@@ -17,24 +32,30 @@
 }
 
 .search input{
-    padding: 8px;
+    padding: 10px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    border: 2px solid white;
-    border: none;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .search button{
     background-color: transparent;
-    border: 2px solid white;
+    border: 1px solid rgb(0, 0, 0);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.search button:hover{
+    background: rgba(16, 90, 90, 0.8);
+    color:white;
 }
 
 .searchlist{
     position: absolute;
-    margin-top:35px;
+    margin-top:40px;
     list-style-type: none;
     padding: 0;
     width: 9rem;
@@ -46,7 +67,7 @@
     width: 100%;
     text-align: left;
     padding: 0.25rem;
-    background-color: white;
+    background: rgba(255, 255, 255, 0.9);
     color: black;
     border: none;
     border-radius: 0;

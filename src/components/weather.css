@@ -1,23 +1,26 @@
 .weather-container{
     flex:5;
     position: relative;
-    max-width: 400px;
+    max-width: 500px;
     height: 100;
 }
 
 .currentWeather{
     display: block;
     text-align: center;
-    margin-top: 1rem;
-    background-color: rgba(0, 0, 0, 0.4);
-    width: 50%;
-    margin: 1rem auto;
+    background-color: rgba(255,255,255,0.8);
+    /* background-color: rgba(16, 90, 90, 0.8); */
+    width: 40%;
+    margin: 2rem auto;
+    border: 1px solid black;
     border-radius: 1rem;
     padding: 0.5rem;
+    color:rgb(0, 0, 0);
 }
 
 .currentWeather p{
     padding: 2px;
+
 }
 .cityname{
     font-size:1.25rem;
@@ -30,7 +33,7 @@
 .forecast-panel{
     display:flex;
     overflow-x: scroll;
-    margin-top:3rem;
+    margin-top: 5rem;
     scrollbar-width: thin;
    padding-bottom: 1rem;
 }

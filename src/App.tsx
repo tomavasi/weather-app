@@ -38,7 +38,7 @@ sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true")).catch
   return (
   <main className="main">
   <div className="title">
-    <h1>Weathify</h1>
+    <h1>Weath</h1><span>ify</span>
   </div>
   {/* <SpotifyLogin sdk={sdk} accessToken={accessToken} setloginState={setloginState}/> */}
     {(!loginState || loginState === "false") &&
@@ -53,7 +53,11 @@ sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true")).catch
     In order to procceed to the app you need a Spotify account.
     </p>
     <div className="spotifybtn">
-    <button  onClick={loginToSpotify}>Login to Spotify</button></div></div>}
+    <button  onClick={loginToSpotify}>Login to Spotify</button></div>
+    <p className="p4">
+      * This app is in development mode and it requires a communication with the Spotify services. Besides logging in ,using the button above, the developer needs to grand access to a specific account manually. Do you wish to get access in order to check the funcionality of the app? Please contact the developer.
+    </p>
+    </div>}
     {!forecast && accessToken &&
     <Search/>}
     {forecast && currentWeather && loginState === "true"&&

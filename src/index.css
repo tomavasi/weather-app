@@ -3,14 +3,17 @@
 }
 body {
     margin: auto;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Roboto', sans-serif;
     overflow: auto;
-    background:rgb(33, 35, 37);
+    background: rgb(106,121,198);
+background: linear-gradient(90deg, rgba(106,121,198,1) 0%, rgba(184,212,203,1) 36%);
+    /* background:rgb(184, 212, 203); */
+    /* background:rgb(33, 35, 37); */
     /* background: rgb(206, 223, 234); */
     /* background: rgb(206, 174, 234); */
-    /* background: rgb(167, 109, 217); */
+    /* background: rgb(134, 100, 161); */
     /* background: rgb(74, 137, 186); */
-    animation: gradient 15s ease infinite;
+    /* animation: gradient 15s ease infinite; */
     background-size: 400% 400%;
     background-attachment: fixed;
 }
