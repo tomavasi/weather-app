@@ -1,5 +1,5 @@
 .weather-container{
-    flex:5;
+    /* flex:5; */
     position: relative;
     max-width: 500px;
     height: 100;
@@ -43,4 +43,9 @@
     text-align: center;
     width:50px
 
+}
+
+@media (max-width:500px){
+    .forecast-panel{
+       width: 350px}
 }
