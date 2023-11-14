@@ -8,3 +8,7 @@ Its a weather app with a spotify webplayer intergrated.
 
 ** The app is in development modus. Besides logging in to Spotify the developer has to give specific permission to an account manually.
 Please contact the developer if you wish to do so
+
+Check the webiste here: https://tomavasi.github.io/weather-app/
+
+
