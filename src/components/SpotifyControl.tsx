@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react"
-import {SpotifyApi, SearchResults, User } from "@spotify/web-api-ts-sdk"
+import {SpotifyApi, SearchResults } from "@spotify/web-api-ts-sdk"
 import { DataContext } from "../context/DataContext";
 import {
   usePlaybackState,
@@ -11,29 +11,21 @@ import heartSvg from "../assets/heart-64.svg"
 import heartSvgRed from "../assets/heart-red.svg"
 import Spotify_Logo from "../images/Spotify_Logo_RGB_Green.png"
 
-
-
-
-
 function SpotifyControl({sdk, accessToken, setloginState}:{sdk:SpotifyApi | null | undefined, accessToken: string | null,setloginState: React.Dispatch<React.SetStateAction<string>>}) {
 const {currentWeather}= useContext(DataContext)
 const [playlists, setPlaylist]= useState<SearchResults>({} as SearchResults)
 const [shuffle, setShuffle] = useState(false)
 const [volume, setVolume] = useState(0.5)
 const [newVolume,setNewVolume] = useState(0)
-const [user, setUser] = useState<User>({} as User)
 const [refresh, setRefresh] = useState(false)
 const [togglePlay, setTogglePlay] = useState(true)
 const [likedSong, setLikedSong] = useState(false)
 const [matches, setMatches] = useState(window.matchMedia("(max-width:650px)").matches)
 
-const playbackState = usePlaybackState(true, 100);
+const playbackState = usePlaybackState();
 const playerDevice = usePlayerDevice();
+const player = useSpotifyPlayer();
 
-const player=useSpotifyPlayer();
-useEffect(()=>{
-  window.matchMedia("(max-width:650px)").addEventListener("change", e => setMatches(e.matches))
-},[])
 useEffect(() => {
   const setWeatherPlaylist = async () => {
     if (sdk) {
@@ -47,7 +39,12 @@ useEffect(() => {
   setWeatherPlaylist();
 }, [currentWeather?.weather[0].description, accessToken]);
 
+useEffect(()=>{
+  window.matchMedia("(max-width:650px)").addEventListener("change", e => setMatches(e.matches))
+},[])
+
 useEffect(() => {
+
   if (!playerDevice || !sdk) return;
   const startPlayback = async () => {
     const playlistItems = playlists.playlists?.items;
@@ -57,10 +54,10 @@ useEffect(() => {
       playerDevice.device_id,
       singlePlaylist[playNm]
     );
-  const userProfile = await sdk?.currentUser.profile()
-  setUser(userProfile)
   setTogglePlay(true)
+
   }
+
   startPlayback();
 
 }, [playerDevice, playlists.playlists?.items, accessToken, refresh]);
@@ -68,9 +65,11 @@ useEffect(() => {
 const shuffleTrack = () => {
   setShuffle((prevShuffle) => !prevShuffle);
   sdk?.player.togglePlaybackShuffle(!shuffle, playerDevice?.device_id);
-};
-const currentlyPlaying = playbackState?.context.metadata?.current_item;
 
+};
+const currentlyPlaying = playbackState?.track_window.current_track;
+
+console.log(currentlyPlaying);
 const changeVolume = (event:any) =>{
   const newVolume = event.target.value
   setVolume(newVolume);
@@ -103,6 +102,7 @@ const resumePause = () =>{
   setTogglePlay(prev=>!prev)
   }
 }
+
 const mute = () =>{
   if (volume != 0){
     player?.setVolume(newVolume);
@@ -126,28 +126,27 @@ return (
     <div className="logo">
      <img src={Spotify_Logo} height={30} width="auto"/>
       <div className="logout">
-      Hi, {user.display_name}
       <button onClick={logOut}><MdLogout title="Log out"/></button>
       </div>
     </div>
     {!matches &&
     <div className="mainplayer">
       <div className="trackImg">
-      {currentlyPlaying?.images && (
-            <img src={currentlyPlaying.images[1].url} alt="Album Art" />
+      {currentlyPlaying?.album.images && (
+            <img src={currentlyPlaying?.album.images[0].url} alt="Album Art" />
           )}
       <div className="info">
       <p className="track">{currentlyPlaying?.name}</p>
       <p className="artist">{currentlyPlaying?.artists[0].name}</p>
       </div>
-      <button className="btnliked" onClick={likeButton}>{!likedSong ? <img src={heartSvg} title="Add to liked"/> : <img src={heartSvgRed} title="Remove from liked"/>}</button>
+      <button className={!likedSong ? "btnliked" : "btnlikedRed"} onClick={likeButton}>{!likedSong ? <img src={heartSvg} title="Add to liked"/> : <img src={heartSvgRed} title="Remove from liked"/>}</button>
       </div>
       <div className="playbackbtns">
       <button className="btn" onClick={()=>setRefresh(prev=>!prev)}><MdRefresh title="Refresh playlist"/></button>
         <button className="btn" onClick={() => player?.previousTrack()}><MdSkipPrevious title="Previous"/></button>
         <button className="playbtn" onClick={resumePause}>{togglePlay ? <MdPause title="Pause"/> : <MdPlayArrow title="Play"/>}</button>
         <button className="btn" onClick={() => {player?.nextTrack();setTogglePlay(true)}}><MdSkipNext title="Next"/></button>
-        <button className="btn" onClick={shuffleTrack}><MdShuffle/></button>
+        <button className={!shuffle ? "btn" : "clikedShuffle"} onClick={shuffleTrack}><MdShuffle/></button>
       </div>
       <div className="volume">
         <p onClick={mute}>{volume == 0 ? <MdVolumeOff /> : <MdVolumeDown/>}</p>
@@ -159,15 +158,15 @@ return (
       <div className="mobile">
        <div className="mainplayer">
        <div className="trackImg">
-       {currentlyPlaying?.images && (
-             <img src={currentlyPlaying.images[1].url} alt="Album Art" />
+       {currentlyPlaying?.album.images && (
+             <img src={currentlyPlaying.album.images[1].url} alt="Album Art" />
            )}
       <div className="mobileInfo">
        <div className="info">
        <p className="track">{currentlyPlaying?.name}</p>
        <p className="artist">{currentlyPlaying?.artists[0].name}</p>
        </div>
-       <button className="btnliked" onClick={likeButton}>{!likedSong ? <img src={heartSvg} title="Add to liked"/> : <img src={heartSvgRed} title="Remove from liked"/>}</button>
+       <button className={!likedSong ? "btnliked" : "btnlikedRed"} onClick={likeButton}>{!likedSong ? <img src={heartSvg} title="Add to liked"/> : <img src={heartSvgRed} title="Remove from liked"/>}</button>
        </div>
        </div>
        <div className="playbackbtns">
@@ -175,7 +174,7 @@ return (
          <button className="btn" onClick={() => player?.previousTrack()}><MdSkipPrevious title="Previous"/></button>
          <button className="playbtn" onClick={resumePause}>{togglePlay ? <MdPause title="Pause"/> : <MdPlayArrow title="Play"/>}</button>
          <button className="btn" onClick={() => {player?.nextTrack();setTogglePlay(true)}}><MdSkipNext title="Next"/></button>
-         <button className="btn" onClick={shuffleTrack}><MdShuffle/></button>
+         <button className={!shuffle ? "btn" : "clikedShuffle"} onClick={shuffleTrack}><MdShuffle/></button>
        </div>
        </div>
        <div className="volume">
