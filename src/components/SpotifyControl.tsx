@@ -69,7 +69,6 @@ const shuffleTrack = () => {
 };
 const currentlyPlaying = playbackState?.track_window.current_track;
 
-console.log(currentlyPlaying);
 const changeVolume = (event:any) =>{
   const newVolume = event.target.value
   setVolume(newVolume);
