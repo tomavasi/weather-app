@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useCallback, memo } from "react";
 import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 import SpotifyControl from "./SpotifyControl";

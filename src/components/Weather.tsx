@@ -1,3 +1,4 @@
+import * as React from "react"
 import { forecastType, CurrentWeatherType} from "../context/DataContext"
 import "./weather.css"
 type PropsType ={
