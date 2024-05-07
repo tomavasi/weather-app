@@ -62,6 +62,11 @@ export type CurrentWeatherType = {
     description: string
   }
 ]
+wind: {
+  speed: number,
+  deg: number,
+  gust: number
+} 
 }
 type ChildernType = {children: ReactElement | ReactElement []}
 export type ContextType = {
@@ -75,7 +80,7 @@ export type ContextType = {
   cityData: cityType | null
   options: []
   setOptions: React.Dispatch<React.SetStateAction<[]>>
- 
+
 }
 
 
@@ -126,7 +131,7 @@ export const DataContextProvider = ({children}:ChildernType) =>{
 
       }
     const getCurrentWeather = (data:cityType) =>{
-      axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${data.lat}&lon=${data.lon}&units=metric&appid=26fc269eeca753fde23dfbcc185c7c69`).
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${data.lat}&lon=${data.lon}&units=metric&appid=${import.meta.env.VITE_API_KEY}`).
       then(response=> {
         setCurrentWeather(response.data);
       });

@@ -4,7 +4,8 @@
 body {
     margin: auto;
     font-family: 'Roboto', sans-serif;
-    overflow: auto;
+    height: 100vh;
+    /* overflow: auto; */
     background: rgb(106,121,198);
 background: linear-gradient(90deg, rgba(106,121,198,1) 0%, rgba(184,212,203,1) 36%);
     /* background:rgb(184, 212, 203); */

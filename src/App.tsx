@@ -38,6 +38,7 @@ sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true")).catch
 
   return (
   <main className="main">
+  <div className="main-window">
   <div className="mainSection">
   <div className="title">
     <h1>Weath</h1><span>ify</span>
@@ -63,10 +64,11 @@ sdk.authenticate().then(()=>window.localStorage.setItem("login" , "true")).catch
     {!forecast && accessToken &&
     <Search/>}
     {forecast && currentWeather && loginState === "true"&&
-    <div>
+    <div className="weather">
     <Weather forecast={forecast} currentWeather= {currentWeather}/>
     </div>
     }
+  </div>
   </div>
   {forecast && currentWeather && loginState === "true"&&
   <WebPlaybackPlayer sdk={sdk} accessToken={accessToken} setloginState={setloginState}/>
