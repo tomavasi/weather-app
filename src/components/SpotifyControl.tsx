@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect, useState, useContext } from "react"
 import {SpotifyApi, SearchResults } from "@spotify/web-api-ts-sdk"
 import { DataContext } from "../context/DataContext";
